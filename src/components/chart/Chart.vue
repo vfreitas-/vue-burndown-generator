@@ -8,39 +8,42 @@
     import BurndownService from '_services/BurndownService'
 
     export default {
-        name: 'Graph',
+        name: 'Chart',
         data () {
             return  {
                 testData: [
                     {
-                        x: '15/02/2017',
-                        y: 20
+                        date: '15/02/2017',
+                        value: 20
                     },
                     {
-                        x: '17/02/2017',
-                        y: 17
+                        date: '17/02/2017',
+                        value: 17
                     },
                     {
-                        x: '18/02/2017',
-                        y: 15
+                        date: '18/02/2017',
+                        value: 15
                     },
                     {
-                        x: '19/02/2017',
-                        y: 6
+                        date: '19/02/2017',
+                        value: 6
                     },
                     {
-                        x: '20/02/2017',
-                        y: 3
+                        date: '20/02/2017',
+                        value: 3
                     },
                     {
-                        x: '21/02/2017',
-                        y: 0
+                        date: '21/02/2017',
+                        value: 0
                     },
                 ]
             }
         },
         mounted () {
-            this.service = new BurndownService(this.$refs.svg, this.testData)
+            this.service = new BurndownService(
+                this.$refs.svg, 
+                JSON.parse(JSON.stringify(this.testData))
+            )
 
             this.service.render()
         },
@@ -48,31 +51,24 @@
 
         }
     }
-    [{
-		'x': 0,
-		'y': 200
-	}, {
-		'x': 10,
-		'y': 50
-	}, {
-		'x': 20,
-		'y': 180
-	}, {
-		'x': 30,
-		'y': 60
-	}, {
-		'x': 40,
-		'y': 120
-	}, {
-		'x': 50,
-		'y': 30
-	}]
 </script>
 
-<style lang="sass" scoped>
+<style lang="sass">
     .chart {
         width: 100%;
         height: 100%;
         min-height: 400px;
+    }
+
+    .line {
+        fill: none;
+        stroke: steelblue;
+        stroke-width: 2px;
+    }
+
+    .line-ideal {
+        fill: none;
+        stroke: black;
+        stroke-width: 3px;
     }
 </style>
