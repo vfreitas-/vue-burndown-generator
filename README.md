@@ -1,16 +1,3 @@
-# Vuex shopping list
+# vue-burndown-generator
+A simple burndown generator made with Vue and D3.js
 
-A simple product list filter, using vuex.
-
-## Development
-
-```
-$ git clone git@github.com:vfreitas-/vuex-shopping-list.git
-$ cd vuex-shopping-list
-$ npm install
-$ npm start
-```
-
-
-## License
-MIT
