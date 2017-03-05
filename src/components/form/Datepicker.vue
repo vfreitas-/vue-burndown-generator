@@ -8,10 +8,13 @@
     import moment from 'moment'
     import MdDatepicker from 'vue-datepicker'
 
-    const today = moment().format('DD/MM/YYYY')
-
     export default {
         name: 'Datepicker',
+        props: {
+            startDate: {
+                required: true
+            }
+        },
         data () {
             return {
                 option: {
@@ -33,9 +36,6 @@
                         header: '#673ab7',
                         headerText: 'white'
                     }
-                },
-                startDate: {
-                    time: today
                 },
                 limit: [
                     {

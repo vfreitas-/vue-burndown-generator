@@ -1,15 +1,15 @@
-/* Bind the function to an event
- * 
- * @param fn   {function} function you want to debounce
- * @param wait {number}   interval wait in ms
+
+/**
+ * Add only week days to a moment date object
  */
-export function debounce(fn, wait) {
-    let timeout
-    return function() {
-        let args = arguments
-        clearTimeout(timeout)
-        timeout = setTimeout(() => {
-            fn.apply(this, args)
-        }, wait || 100)
+export const addWeekDays = (date, quantity) => {
+    let tmp = date
+    while (quantity > 0) {
+        tmp = tmp.add(1, 'days')
+        console.log(tmp.isoWeekday())
+        if (tmp.isoWeekday() !== 6 && tmp.isoWeekday() !== 7) {
+            quantity -= 1
+        }
     }
+    return tmp
 }

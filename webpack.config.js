@@ -21,9 +21,10 @@ let config = {
     devtool: 'source-map',
     resolve: {
         alias:{
+            _app: path.join(base_path),
             _components: path.join(base_path, 'components'),
             _services: path.join(base_path, 'services'),
-            _vuex: path.join(base_path, 'store')
+            _store: path.join(base_path, 'store')
         }
     },
     module: {
