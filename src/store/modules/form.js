@@ -1,3 +1,5 @@
+import Vue from 'vue'
+
 
 export default {
     state: {
@@ -5,8 +7,9 @@ export default {
         data: []
     },
     mutations: {
-        updateForm (state, data) {
-            Object.assign(state, data)
+        updateForm (state, {data, title}) {
+            Vue.set(state, 'data', data)
+            Vue.set(state, 'title', title)
         }
     },
     actions: {

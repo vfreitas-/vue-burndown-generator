@@ -55,11 +55,25 @@
         methods: {
             generate () {
                 let endDate = addWeekDays(
-                    moment(this.startDate.time, 'MM-DD-YYYY'),
+                    moment(this.startDate.time, 'DD/MM/YYYY'),
                     this.days
                 )
 
-                console.log(endDate)
+                let data = [
+                    {
+                        date: this.startDate.time,
+                        value: this.points
+                    },
+                    {
+                        date: endDate.format('DD/MM/YYYY'),
+                        value: 0
+                    }
+                ]
+
+                this.$store.dispatch('updateForm', {
+                    title: this.title,
+                    data
+                })
             }
         },
         components: {

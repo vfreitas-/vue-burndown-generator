@@ -11,44 +11,27 @@
         name: 'Chart',
         data () {
             return  {
-                testData: [
-                    {
-                        date: '15/02/2017',
-                        value: 20
-                    },
-                    {
-                        date: '17/02/2017',
-                        value: 17
-                    },
-                    {
-                        date: '18/02/2017',
-                        value: 15
-                    },
-                    {
-                        date: '19/02/2017',
-                        value: 6
-                    },
-                    {
-                        date: '20/02/2017',
-                        value: 3
-                    },
-                    {
-                        date: '21/02/2017',
-                        value: 0
-                    },
-                ]
+                
+            }
+        },
+        computed: {
+            formData () {
+                return this.$store.state.form
             }
         },
         mounted () {
-            this.service = new BurndownService(
-                this.$refs.svg, 
-                JSON.parse(JSON.stringify(this.testData))
-            )
-
-            this.service.render()
+            this.service = new BurndownService(this.$refs.svg)
+            // this.service.render()
         },
-        methods: {
-
+        watch: {
+            formData: {
+                handler (val) {
+                    this.service.render(
+                        JSON.parse(JSON.stringify(val.data))
+                    )
+                },
+                deep: true
+            }
         }
     }
 </script>

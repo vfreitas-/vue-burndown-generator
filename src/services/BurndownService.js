@@ -2,7 +2,7 @@ import * as d3 from 'd3'
 
 export default class Burndown {
 
-    constructor (svg, data, options) {
+    constructor (svg, options) {
         this.svg = d3.select(svg)
         this.width = parseInt(this.svg.style('width')) 
         this.height = parseInt(this.svg.style('height'))
@@ -10,23 +10,6 @@ export default class Burndown {
         this.opts = Object.assign({
             padding: 50
         }, options)
-
-        this.data = data.map(d => {
-            d.date = this.parseTime(d.date)
-            d.value = +d.value
-            return d
-        })
-
-        this.idealLine = [
-            {
-                date: this.xDomain[0],
-                value: this.yDomain[1]
-            },
-            {
-                date: this.xDomain[1],
-                value: this.yDomain[0]
-            }
-        ]
     }
 
     get parseTime () {
@@ -38,7 +21,7 @@ export default class Burndown {
     }
 
     get yDomain () {
-        return d3.extent(this.data, d => d.value * 1.2)
+        return d3.extent(this.data, d => d.value)
     }
 
     get xScale () {
@@ -60,7 +43,15 @@ export default class Burndown {
             .y(d => this.yScale(d.value))
     }
 
-    render () {
+    render (data) {
+        this.data = data.map(d => {
+            d.date = this.parseTime(d.date)
+            d.value = +d.value
+            return d
+        })
+        
+        this.clean()
+
         this.svg.attr('width', this.width)
             .attr('height', this.height)
 
@@ -72,14 +63,12 @@ export default class Burndown {
             .attr('class', 'line')
             .attr('d', this.linePath)
 
-        mainGroup.append('path')
-            .data([this.idealLine])
-            .attr('class', 'line-ideal')
-            .attr('d', this.linePath)
-
         mainGroup.append('g')
             .attr('transform', this.t(0, this.height - (2 * this.opts.padding)))
-            .call(d3.axisBottom(this.xScale))
+            .call(
+                d3.axisBottom(this.xScale)
+                    .tickArguments([d3.timeDay.every(1)])
+            )
 
         mainGroup.append('g')
             .call(d3.axisLeft(this.yScale))
@@ -96,6 +85,10 @@ export default class Burndown {
         }
         
         return `translate(${width}, ${height})`
+    }
+
+    clean () {
+        this.svg.select('g').remove()
     }
 
 }
