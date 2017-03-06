@@ -43,35 +43,49 @@ export default class Burndown {
             .y(d => this.yScale(d.value))
     }
 
-    render (data) {
+    render (title, data) {
+        //parse the data
         this.data = data.map(d => {
             d.date = this.parseTime(d.date)
-            d.value = +d.value
+            d.value = parseInt(d.value)
             return d
         })
         
+        //remove the old svg content
         this.clean()
 
-        this.svg.attr('width', this.width)
-            .attr('height', this.height)
-
+        //create a main svg group element
+        //and add a padding to it
         const mainGroup = this.svg.append('g')
             .attr('transform', this.t(this.opts.padding))
-
+        
+        //create the burndown 'ideal' line
+        //passing the data through and setting de path - d - 
+        //as the output of the linePath function
         mainGroup.append('path')
             .data([this.data])
             .attr('class', 'line')
             .attr('d', this.linePath)
 
+        //add the x axis
         mainGroup.append('g')
             .attr('transform', this.t(0, this.height - (2 * this.opts.padding)))
             .call(
                 d3.axisBottom(this.xScale)
                     .tickArguments([d3.timeDay.every(1)])
             )
-
+        
+        //add the y axis
         mainGroup.append('g')
             .call(d3.axisLeft(this.yScale))
+
+        //add the title
+        mainGroup.append('text')
+            .attr('x', (this.width / 2) - this.opts.padding)
+            .attr('y', 0)
+            .attr('text-anchor', 'middle')
+            .style('font-size', '16px')
+            .text(title)
     }
 
     /**

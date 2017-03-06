@@ -27,6 +27,7 @@
             formData: {
                 handler (val) {
                     this.service.render(
+                        val.title,
                         JSON.parse(JSON.stringify(val.data))
                     )
                 },
