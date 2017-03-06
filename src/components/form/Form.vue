@@ -56,7 +56,7 @@
             generate () {
                 let endDate = addWeekDays(
                     moment(this.startDate.time, 'DD/MM/YYYY'),
-                    this.days
+                    this.days - 1
                 )
 
                 let data = [
