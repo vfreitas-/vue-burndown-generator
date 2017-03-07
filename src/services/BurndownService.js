@@ -28,12 +28,11 @@ export default class Burndown {
         return d3.scaleTime().domain(this.xDomain).range([
             0, (this.width - (2 * this.opts.padding))
         ])
-
     }
 
     get yScale () {
         return d3.scaleLinear().domain(this.yDomain).range([
-            this.height - (2 * this.opts.padding), this.opts.padding
+            this.height - (2 * this.opts.padding), 0
         ])
     }
 
@@ -67,24 +66,43 @@ export default class Burndown {
             .attr('class', 'line')
             .attr('d', this.linePath)
 
+        //add grid lines
+        mainGroup.append('g')
+            .attr('class', 'grid')
+            .call(
+                d3.axisLeft(this.yScale)
+                    .tickSize(-(this.width - (2 * this.opts.padding)))
+                    .tickFormat('')
+            )
+
+        mainGroup.append('g')
+            .attr('class', 'grid')
+            .call(
+                d3.axisBottom(this.xScale)
+                    .tickSize((this.height - (2 * this.opts.padding)))
+                    .tickFormat('')
+            )
+
         //add the x axis
         mainGroup.append('g')
+            .attr('class', 'axis x')
             .attr('transform', this.t(0, this.height - (2 * this.opts.padding)))
             .call(
                 d3.axisBottom(this.xScale)
                     .tickArguments([d3.timeDay.every(1)])
             )
-        
+
         //add the y axis
         mainGroup.append('g')
+            .attr('class', 'axis y')
             .call(d3.axisLeft(this.yScale))
 
         //add the title
         mainGroup.append('text')
             .attr('x', (this.width / 2) - this.opts.padding)
-            .attr('y', 0)
+            .attr('y', -15)
             .attr('text-anchor', 'middle')
-            .style('font-size', '16px')
+            .style('font-size', '18px')
             .text(title)
     }
 

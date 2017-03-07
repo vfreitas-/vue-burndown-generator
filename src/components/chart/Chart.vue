@@ -21,7 +21,6 @@
         },
         mounted () {
             this.service = new BurndownService(this.$refs.svg)
-            // this.service.render()
         },
         watch: {
             formData: {
@@ -42,12 +41,32 @@
         width: 100%;
         height: 100%;
         min-height: 400px;
+
+        & > .axis path,
+        & > .axis line {
+            fill: none;
+            stroke: #eee;
+            stroke-width: 2;
+            shape-rendering: crispEdges;
+        }
+
+        .axis {
+            text {
+                font-size: 15px;
+            }
+        }
+
+        .grid .tick {
+            stroke: #eee;
+            opacity: 0.1;
+        }
     }
 
     .line {
         fill: none;
-        stroke: steelblue;
-        stroke-width: 2px;
+        stroke: #91E500;
+        stroke-width: 5;
+        stroke-linecap: round;
     }
 
     .line-ideal {
@@ -55,4 +74,5 @@
         stroke: black;
         stroke-width: 3px;
     }
+
 </style>
