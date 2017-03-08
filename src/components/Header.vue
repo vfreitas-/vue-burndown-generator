@@ -1,12 +1,6 @@
 <template>
     <md-toolbar>
         <h1 class="md-title">Burndown Generator</h1>
-
-        <span style="flex: 1"></span>
-
-        <a href="">
-            <md-icon>github-circle</md-icon>
-        </a>
     </md-toolbar>
 </template>
 

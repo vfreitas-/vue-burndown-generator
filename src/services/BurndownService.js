@@ -90,6 +90,7 @@ export default class Burndown {
             .call(
                 d3.axisBottom(this.xScale)
                     .tickArguments([d3.timeDay.every(1)])
+                    .tickFormat(d3.timeFormat("%d/%m"))
             )
 
         //add the y axis

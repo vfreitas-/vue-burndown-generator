@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="chart-wrapper">
         <svg ref="svg" class="chart"></svg>
     </div>
 </template>
@@ -37,10 +37,20 @@
 </script>
 
 <style lang="sass">
+    .chart-wrapper {
+        max-width: 100%;
+        max-height: 100%;
+        overflow: auto;
+    }
+
     .chart {
         width: 100%;
         height: 100%;
-        min-height: 400px;
+        min-height: 595px;
+        min-width: 842px;
+        overflow: hidden;
+
+        // 595 X 842 pixels
 
         & > .axis path,
         & > .axis line {
