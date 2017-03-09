@@ -4,8 +4,6 @@ export default class Burndown {
 
     constructor (svg, options) {
         this.svg = d3.select(svg)
-        this.width = parseInt(this.svg.style('width')) 
-        this.height = parseInt(this.svg.style('height'))
 
         this.opts = Object.assign({
             padding: 50
@@ -43,6 +41,9 @@ export default class Burndown {
     }
 
     render (title, data) {
+        this.width = parseInt(this.svg.style('width')) 
+        this.height = parseInt(this.svg.style('height'))
+
         //parse the data
         this.data = data.map(d => {
             d.date = this.parseTime(d.date)

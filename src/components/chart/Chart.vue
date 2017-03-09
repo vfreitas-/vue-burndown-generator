@@ -11,7 +11,7 @@
         name: 'Chart',
         data () {
             return  {
-                
+                rendered: false
             }
         },
         computed: {
@@ -25,12 +25,22 @@
         watch: {
             formData: {
                 handler (val) {
-                    this.service.render(
-                        val.title,
-                        JSON.parse(JSON.stringify(val.data))
-                    )
+                    this.render(val)
+
+                    if (!this.rendered) {
+                        window.addEventListener('resize', () => this.render(val))
+                        this.rendered = true
+                    }
                 },
                 deep: true
+            }
+        },
+        methods: {
+            render (data) {
+                this.service.render(
+                    data.title,
+                    JSON.parse(JSON.stringify(data.data))
+                )
             }
         }
     }

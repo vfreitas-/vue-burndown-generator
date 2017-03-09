@@ -10,9 +10,9 @@ export const addWeekDays = (date, quantity) => {
         tmp = tmp.add(1, 'days')
         if (tmp.isoWeekday() !== 6 && tmp.isoWeekday() !== 7) {
             quantity -= 1
-            weekDays.push(moment(tmp))
+            weekDays.push(moment(tmp).format('DD/MM/YYYY'))
         }
     }
-    console.log(weekDays)
+
     return tmp
 }
