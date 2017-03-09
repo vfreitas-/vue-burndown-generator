@@ -1,4 +1,5 @@
 import * as d3 from 'd3'
+import { scaleDiscontinuous, discontinuitySkipWeekends } from 'd3fc-discontinuous-scale'
 
 export default class Burndown {
 
@@ -23,9 +24,12 @@ export default class Burndown {
     }
 
     get xScale () {
-        return d3.scaleTime().domain(this.xDomain).range([
-            0, (this.width - (2 * this.opts.padding))
-        ])
+        return scaleDiscontinuous(d3.scaleTime())
+            .discontinuityProvider(discontinuitySkipWeekends())
+            .domain(this.xDomain)
+            .range([
+                0, (this.width - (2 * this.opts.padding))
+            ])
     }
 
     get yScale () {
@@ -50,7 +54,7 @@ export default class Burndown {
             d.value = parseInt(d.value)
             return d
         })
-        
+
         //remove the old svg content
         this.clean()
 
