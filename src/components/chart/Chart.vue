@@ -1,11 +1,15 @@
 <template>
-    <div class="chart-wrapper">
-        <svg ref="svg" class="chart"></svg>
+    <div ref="wrapper" class="chart-wrapper">
+        <svg ref="svg" class="chart" version="1.1"></svg>
+        <md-button @click.native="download" class="md-fab md-primary md-fab-top-center">
+            <md-icon>get_app</md-icon>
+        </md-button>
     </div>
 </template>
 
 <script>
     import BurndownService from '_services/BurndownService'
+    import { outerHtml, createImage } from '_app/util'
 
     export default {
         name: 'Chart',
@@ -41,6 +45,11 @@
                     data.title,
                     JSON.parse(JSON.stringify(data.data))
                 )
+            },
+            download () {
+                let html = btoa(outerHtml(this.$refs.svg))
+
+                createImage(html, 'burndown.png')
             }
         }
     }
@@ -51,6 +60,7 @@
         max-width: 100%;
         max-height: 100%;
         overflow: auto;
+        position: relative;
     }
 
     .chart {
