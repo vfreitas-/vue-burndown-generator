@@ -1,0 +1,15 @@
+.axis text {
+    font-size: 15px;
+}
+
+.grid .tick {
+    stroke: #eee;
+    opacity: 0.1;
+}
+
+.line {
+    fill: none;
+    stroke: #91E500;
+    stroke-width: 5;
+    stroke-linecap: round;
+}

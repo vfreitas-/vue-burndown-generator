@@ -145,5 +145,4 @@ export default class Burndown {
     clean () {
         this.svg.select('g').remove()
     }
-
 }

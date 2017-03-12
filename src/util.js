@@ -28,6 +28,18 @@ export const outerHtml = el => {
 }
 
 /**
+ * 
+ */
+export const appendStyle = (el, cssStr) => {
+    let styleEl = document.createElement('style')
+    styleEl.setAttribute('type', 'text/css')
+    styleEl.innerHTML = cssStr
+
+    let sibling = el.children[0]
+    el.insertBefore(styleEl, sibling)
+}
+
+/**
  * Create an image within the canvas context from a svg base64 url
  * then create an anchor element and download image as a png file
  */

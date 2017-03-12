@@ -9,13 +9,36 @@
 
 <script>
     import BurndownService from '_services/BurndownService'
-    import { outerHtml, createImage } from '_app/util'
+    import { appendStyle, createImage } from '_app/util'
 
     export default {
         name: 'Chart',
         data () {
             return  {
-                rendered: false
+                rendered: false,
+                chartStyles: `
+                    .chart {
+                        width: 100%;
+                        min-height: 595px;
+                        min-width: 842px;
+                    }
+
+                    .axis text {
+                        font-size: 15px;
+                    }
+
+                    .grid .tick {
+                        stroke: #eee;
+                        opacity: 0.1;
+                    }
+
+                    .line {
+                        fill: none;
+                        stroke: #91E500;
+                        stroke-width: 5;
+                        stroke-linecap: round;
+                    }
+                `
             }
         },
         computed: {
@@ -25,6 +48,7 @@
         },
         mounted () {
             this.service = new BurndownService(this.$refs.svg)
+            appendStyle(this.$refs.svg, this.chartStyles)
         },
         watch: {
             formData: {
@@ -47,7 +71,6 @@
                 )
             },
             download () {
-                let html = outerHtml(this.$refs.svg)
                 createImage(this.$refs.svg, 'burndown.png')
             }
         }
@@ -63,45 +86,6 @@
     }
 
     .chart {
-        width: 100%;
-        height: 100%;
-        min-height: 595px;
-        min-width: 842px;
         overflow: hidden;
-
-        // 595 X 842 pixels
-
-        & > .axis path,
-        & > .axis line {
-            fill: none;
-            stroke: #eee;
-            stroke-width: 2;
-            shape-rendering: crispEdges;
-        }
-
-        .axis {
-            text {
-                font-size: 15px;
-            }
-        }
-
-        .grid .tick {
-            stroke: #eee;
-            opacity: 0.1;
-        }
     }
-
-    .line {
-        fill: none;
-        stroke: #91E500;
-        stroke-width: 5;
-        stroke-linecap: round;
-    }
-
-    .line-ideal {
-        fill: none;
-        stroke: black;
-        stroke-width: 3px;
-    }
-
 </style>
