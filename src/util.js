@@ -21,7 +21,7 @@ export const addWeekDays = (date, quantity) => {
  * 
  */
 export const outerHtml = el => {
-    let cont = document.createElement("div")
+    let cont = document.createElement('div')
     cont.appendChild(el.cloneNode(true))
 
     return cont.innerHTML
@@ -31,28 +31,33 @@ export const outerHtml = el => {
  * Create an image within the canvas context from a svg base64 url
  * then create an anchor element and download image as a png file
  */
-export const createImage = (svgHtml, fileName) => {
+export const createImage = (svgEl, fileName) => {
+    const svgHtml = outerHtml(svgEl)
     const html = btoa(unescape(encodeURIComponent(svgHtml)))
     const svgData = `data:image/svg+xml;base64,${html}`
 
+    let styles = getComputedStyle(svgEl)
+      , width = parseInt(styles.width)
+      , height = parseInt(styles.height)
+
     let canvas = document.createElement('canvas')
       , context = canvas.getContext('2d')
-      , image = new Image()
+    
+    canvas.width = width
+    canvas.height = height
+
+    let image = new Image()
 
     image.onload = function() {
-        console.log('dsadsasdadsads')
-        context.drawImage(image, 0, 0)
-
-        canvas.toBlob(blob => {
-            let a = document.createElement('a')
-            a.download = fileName
-            a.href = blob
-            a.click()
-        })
+        context.clearRect ( 0, 0, width, height)
+        context.drawImage(image, 0, 0, width, height)
 
         let canvasData = canvas.toDataURL('image/png')
 
-        
+        let a = document.createElement('a')
+        a.download = fileName
+        a.href = canvasData
+        a.click()
     }
 
     image.src = svgData

@@ -1,6 +1,6 @@
 <template>
     <div ref="wrapper" class="chart-wrapper">
-        <svg ref="svg" class="chart" version="1.1"></svg>
+        <svg ref="svg" class="chart" xmlns="http://www.w3.org/2000/svg" version="1.1"></svg>
         <md-button @click.native="download" class="md-fab md-primary md-fab-top-center">
             <md-icon>get_app</md-icon>
         </md-button>
@@ -47,9 +47,8 @@
                 )
             },
             download () {
-                let html = btoa(outerHtml(this.$refs.svg))
-
-                createImage(html, 'burndown.png')
+                let html = outerHtml(this.$refs.svg)
+                createImage(this.$refs.svg, 'burndown.png')
             }
         }
     }
