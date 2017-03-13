@@ -1,37 +1,39 @@
 <template>
     <div class="form-wrapper">
         <p>Fill the below form to generate the burndown chart</p>
-        <md-layout md-gutter="16" md-column-xsmall>
-            <md-layout>
-                <md-input-container>
-                    <label>Burndown Title</label>
-                    <md-input v-model="title"></md-input>
-                </md-input-container>
+        <form @submit="generate">
+            <md-layout md-gutter="16" md-column-xsmall>
+                <md-layout>
+                    <md-input-container>
+                        <label>Burndown Title</label>
+                        <md-input v-model="title"></md-input>
+                    </md-input-container>
+                </md-layout>
+                <md-layout>
+                    <md-subheader>Start date</md-subheader>
+                    <datepicker :start-date="startDate"></datepicker>
+                </md-layout>
             </md-layout>
-            <md-layout>
-                <md-subheader>Start date</md-subheader>
-                <datepicker :start-date="startDate"></datepicker>
+            <md-layout md-gutter="16" md-column-xsmall>
+                <md-layout>
+                    <md-input-container>
+                        <label>Work Days</label>
+                        <md-input v-model="days" type="number"></md-input>
+                    </md-input-container>
+                </md-layout>
+                <md-layout>
+                    <md-input-container>
+                        <label>Points</label>
+                        <md-input v-model="points" type="number"></md-input>
+                    </md-input-container>
+                </md-layout>
             </md-layout>
-        </md-layout>
-        <md-layout md-gutter="16" md-column-xsmall>
-            <md-layout>
-                <md-input-container>
-                    <label>Work Days</label>
-                    <md-input v-model="days" type="number"></md-input>
-                </md-input-container>
+            <md-layout md-align="center" md-gutter="16">
+                <md-button @click.native="generate" class="md-raised md-primary">
+                    Generate
+                </md-button>
             </md-layout>
-            <md-layout>
-                <md-input-container>
-                    <label>Points</label>
-                    <md-input v-model="points" type="number"></md-input>
-                </md-input-container>
-            </md-layout>
-        </md-layout>
-        <md-layout md-align="center" md-gutter="16">
-            <md-button @click.native="generate" class="md-raised md-primary">
-                Generate
-            </md-button>
-        </md-layout>
+        </form>
         <hr/>
     </div>
 </template>

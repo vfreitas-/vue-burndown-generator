@@ -1,9 +1,9 @@
 <template>
     <div ref="wrapper" class="chart-wrapper">
-        <svg ref="svg" class="chart" xmlns="http://www.w3.org/2000/svg" version="1.1"></svg>
-        <md-button @click.native="download" class="md-fab md-primary md-fab-top-center">
+        <md-button @click.native="download" class="download md-raised md-primary">
             <md-icon>get_app</md-icon>
         </md-button>
+        <svg ref="svg" class="chart" xmlns="http://www.w3.org/2000/svg" version="1.1"></svg>
     </div>
 </template>
 
@@ -97,6 +97,11 @@
         max-height: 100%;
         overflow: auto;
         position: relative;
+
+        .download {
+            display: block;
+            margin: 5px auto;
+        }
     }
 
     .chart {
