@@ -4,7 +4,7 @@
   "scripts": {
     "start": "npm run clean && webpack-dev-server --inline --hot",
     "build:dev": "npm run clean && webpack -w",
-    "build:prod": "npm run clean && webpack -p",
+    "build:prod": "npm run clean && NODE_ENV=production webpack -p",
     "clean": "rimraf dist/ index.html"
   },
   "author": "Vitor Freitas",
