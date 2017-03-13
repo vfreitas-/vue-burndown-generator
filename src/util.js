@@ -42,6 +42,9 @@ export const appendStyle = (el, cssStr) => {
 /**
  * Create an image within the canvas context from a svg base64 url
  * then create an anchor element and download image as a png file
+ * 
+ * @param {Element} svgEl the svg element to download as a png image
+ * @param {String} fileName the name of the file to download
  */
 export const createImage = (svgEl, fileName) => {
     const svgHtml = outerHtml(svgEl)

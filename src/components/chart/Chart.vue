@@ -21,6 +21,7 @@
                         width: 100%;
                         min-height: 595px;
                         min-width: 842px;
+                        background-color: #fff;
                     }
 
                     .axis text {
@@ -38,6 +39,14 @@
                         stroke-width: 5;
                         stroke-linecap: round;
                     }
+
+                    .title {
+                        font-size: 18px;
+                    }
+
+                    .label {
+                        font-size: 16px;
+                    }
                 `
             }
         },
@@ -48,7 +57,6 @@
         },
         mounted () {
             this.service = new BurndownService(this.$refs.svg)
-            appendStyle(this.$refs.svg, this.chartStyles)
         },
         watch: {
             formData: {
@@ -65,6 +73,12 @@
         },
         methods: {
             render (data) {
+                if (!this.$refs.svg.children.length) {
+                    //set the chart styles on a style tag inside the svg element
+                    //better than keepping all styles on d3 queries?
+                    appendStyle(this.$refs.svg, this.chartStyles)
+                }
+
                 this.service.render(
                     data.title,
                     JSON.parse(JSON.stringify(data.data))

@@ -105,27 +105,27 @@ export default class Burndown {
 
         //add the title
         mainGroup.append('text')
+            .attr('class', 'title')
             .attr('x', (this.width / 2) - this.opts.padding)
             .attr('y', -15)
             .attr('text-anchor', 'middle')
-            .style('font-size', '18px')
             .text(title)
 
         //add y axis label
         mainGroup.append('text')
+            .attr('class', 'label')
             .attr('y', -40)
             .attr('x', -((this.height / 2) - this.opts.padding))
             .attr('text-anchor', 'middle')
             .attr('transform', 'rotate(-90)')
-            .style('font-size', '16px')
             .text('Tasks')
         
         //add x axis label
         mainGroup.append('text')
+            .attr('class', 'label')
             .attr('x', (this.width / 2) - this.opts.padding)
             .attr('y', this.height - this.opts.padding - 30)
             .attr('text-anchor', 'middle')
-            .style('font-size', '16px')
             .text('Days')
     }
 

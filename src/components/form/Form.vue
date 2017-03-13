@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="form-wrapper">
         <p>Fill the below form to generate the burndown chart</p>
         <md-layout md-gutter="16" md-column-xsmall>
             <md-layout>
@@ -27,11 +27,12 @@
                 </md-input-container>
             </md-layout>
         </md-layout>
-        <md-layout md-align="center">
+        <md-layout md-align="center" md-gutter="16">
             <md-button @click.native="generate" class="md-raised md-primary">
                 Generate
             </md-button>
         </md-layout>
+        <hr/>
     </div>
 </template>
 
@@ -83,5 +84,10 @@
 </script>
 
 <style lang="sass" scoped>
+    .form-wrapper {
 
+        hr {
+            margin-top: 10px;
+        }
+    }
 </style>
