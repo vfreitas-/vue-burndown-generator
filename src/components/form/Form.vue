@@ -1,7 +1,7 @@
 <template>
     <div class="form-wrapper">
         <p>Fill the below form to generate the burndown chart</p>
-        <form @submit="generate">
+        <form @submit.prevent="generate">
             <md-layout md-gutter="16" md-column-xsmall>
                 <md-layout>
                     <md-input-container>
@@ -29,7 +29,7 @@
                 </md-layout>
             </md-layout>
             <md-layout md-align="center" md-gutter="16">
-                <md-button @click.native="generate" class="md-raised md-primary">
+                <md-button @click.native="generate" type="submit" class="md-raised md-primary">
                     Generate
                 </md-button>
             </md-layout>
