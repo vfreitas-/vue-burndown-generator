@@ -35,7 +35,7 @@ export default class Burndown {
     get yScale () {
         return d3.scaleLinear().domain(this.yDomain).range([
             this.height - (2 * this.opts.padding), 0
-        ])
+        ]).nice()
     }
 
     get linePath () {
