@@ -8,6 +8,10 @@ A simple burndown generator made with Vue and D3.js
   <img src="https://david-dm.org/vfreitas-/vue-burndown-generator/dev-status.svg"/>
 </a>
 
+<a href="https://vfreitas-.github.io/vue-burndown-generator/" target="_blank">
+  DEMO
+</a>
+
 ## Running this repo
 
 ```
