@@ -49,10 +49,6 @@ let config = {
                 test: /\.css$/,
                 loader: 'style-loader!css-loader'
             }
-            // {
-            //     test: /inline\.css$/,
-            //     loader: 'css-loader'
-            // }
         ]
     },
     plugins: [

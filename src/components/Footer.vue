@@ -1,10 +1,8 @@
 <template>
     <div class="footer md-primary">
         <div class="container">
-            <!--<md-layout md-gutter="16" md-column-xsmall md-align="center">-->
-                <p>Current browser support: Chrome, Edge and Firefox  <b>:not(.safari)</b></p>
-                <p>Made with Vue and D3.js</p>
-            <!--</md-layout>-->
+            <p>Download browser support: Chrome, Edge and Firefox  <b>:not(.safari)</b></p>
+            <p>Made with Vue and D3.js</p>
         </div>
     </div>
 </template>
