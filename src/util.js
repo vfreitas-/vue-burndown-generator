@@ -2,6 +2,10 @@ import moment from 'moment'
 
 /**
  * Add only week days to a moment date object
+ * 
+ * @param {Moment} data the moment object of the initial date
+ * @param {Number} quantity number of days to add
+ * @return {Moment} object
  */
 export const addWeekDays = (date, quantity) => {
     let tmp = date
@@ -18,7 +22,10 @@ export const addWeekDays = (date, quantity) => {
 }
 
 /**
+ * Get the outerHtml of an element
  * 
+ * @param {Element} el the element
+ * @return {String} containing the element outer html
  */
 export const outerHtml = el => {
     let cont = document.createElement('div')
@@ -28,7 +35,10 @@ export const outerHtml = el => {
 }
 
 /**
+ * Append a style tag to an element before the first child
  * 
+ * @param {Element} el element to receive the style tag
+ * @param {String} cssStr a string containing the css styles
  */
 export const appendStyle = (el, cssStr) => {
     let styleEl = document.createElement('style')
@@ -46,7 +56,7 @@ export const appendStyle = (el, cssStr) => {
  * @param {Element} svgEl the svg element to download as a png image
  * @param {String} fileName the name of the file to download
  */
-export const createImage = (svgEl, fileName) => {
+export const downloadSvg = (svgEl, fileName) => {
     const svgHtml = outerHtml(svgEl)
     const html = btoa(unescape(encodeURIComponent(svgHtml)))
     const svgData = `data:image/svg+xml;base64,${html}`

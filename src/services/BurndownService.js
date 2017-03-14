@@ -1,8 +1,17 @@
 import * as d3 from 'd3'
 import { scaleDiscontinuous, discontinuitySkipWeekends } from 'd3fc-discontinuous-scale'
 
+/**
+ * Class Burndown
+ */
 export default class Burndown {
 
+    /**
+     * Class constructor
+     * 
+     * @param {Element} svg
+     * @param {Object} options
+     */
     constructor (svg, options) {
         this.svg = d3.select(svg)
 
@@ -11,18 +20,30 @@ export default class Burndown {
         }, options)
     }
 
+    /**
+     * @type {Function}
+     */
     get parseTime () {
         return d3.timeParse('%d/%m/%Y')
     }
 
+    /**
+     * @type {Array}
+     */
     get xDomain () {
         return d3.extent(this.data, d => d.date)
     }
 
+    /**
+     * @type {Array}
+     */
     get yDomain () {
         return d3.extent(this.data, d => d.value)
     }
 
+    /**
+     * @type {Function}
+     */
     get xScale () {
         return scaleDiscontinuous(d3.scaleTime())
             .discontinuityProvider(discontinuitySkipWeekends())
@@ -32,18 +53,30 @@ export default class Burndown {
             ])
     }
 
+    /**
+     * @type {Function}
+     */
     get yScale () {
         return d3.scaleLinear().domain(this.yDomain).range([
             this.height - (2 * this.opts.padding), 0
         ]).nice()
     }
 
+    /**
+     * @type {Function}
+     */
     get linePath () {
         return d3.line()
             .x(d => this.xScale(d.date))
             .y(d => this.yScale(d.value))
     }
 
+    /**
+     * Render the chart
+     * 
+     * @param {String} title the chart title
+     * @param {Array} data
+     */
     render (title, data) {
         this.width = parseInt(this.svg.style('width')) 
         this.height = parseInt(this.svg.style('height'))
@@ -133,6 +166,10 @@ export default class Burndown {
      * Return a string for the transform property
      * Example: t(200, 300) returns
      * translate(200, 300)
+     * 
+     * @param {Number} width
+     * @param {Number} [height]
+     * @return {String}
      */
     t (width, height) {
         if (!height) {
@@ -142,6 +179,9 @@ export default class Burndown {
         return `translate(${width}, ${height})`
     }
 
+    /**
+     * Clean the svg main group
+     */
     clean () {
         this.svg.select('g').remove()
     }

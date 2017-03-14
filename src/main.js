@@ -5,7 +5,7 @@ import 'vue-material/dist/vue-material.css'
 import App from './components/App.vue'
 import store from './store'
 
-import * as filters from './filters'
+// import * as filters from './filters'
 
 Vue.use(VueMaterial)
 

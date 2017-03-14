@@ -9,7 +9,7 @@
 
 <script>
     import BurndownService from '_services/BurndownService'
-    import { appendStyle, createImage } from '_app/util'
+    import { appendStyle, downloadSvg } from '_app/util'
 
     export default {
         name: 'Chart',
@@ -85,7 +85,7 @@
                 )
             },
             download () {
-                createImage(this.$refs.svg, 'burndown.png')
+                downloadSvg(this.$refs.svg, 'burndown.png')
             }
         }
     }
